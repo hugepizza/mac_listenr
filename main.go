@@ -11,7 +11,8 @@ func main() {
 	ms := getMacAddrs()
 	http.DefaultServeMux.HandleFunc("/mac", func(resp http.ResponseWriter, req *http.Request) {
 		resp.Header().Set("Access-Control-Allow-Origin", "*")
-		resp.Write([]byte(strings.Join(ms, "\n")))
+		resp.Header().Set("Access-Control-Allow-Headers", "*")
+		resp.Write([]byte(strings.Join(ms, ",")))
 	})
 	fmt.Println("运行中 访问植提桥后台时请保持运行 ...")
 	http.ListenAndServe(":9999", http.DefaultServeMux)
